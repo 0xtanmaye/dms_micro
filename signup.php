@@ -9,7 +9,7 @@ if(!empty($email) || !empty($password) || !empty($full_name)) {
 	$dbPassword = "qwerty";
 	$dbName = "userdb";
 
-	$conn = mysqli_connect($host, $dbUsername, $dbPassword, $dbN ame);
+	$conn = mysqli_connect($host, $dbUsername, $dbPassword, $dbName);
 	
 	if(mysqli_connect_error()) {
 		die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
