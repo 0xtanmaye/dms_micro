@@ -4,9 +4,9 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Nexus</title>
+	<title>Team Nexus</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'><link rel="stylesheet" href="./style.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'><link rel="stylesheet" href="./stylew.css">
 
 </head>
 <body>
@@ -18,7 +18,7 @@
 		<div class="col-sm-6 col-lg-3 my-auto">
 			<div class="box shadow-sm p-4">
 				<div class="image-wrapper mb-3">
-					<img class="img-fluid" src="zinc.png" alt="..." />
+					<img class="img-fluid" src="zinc.png" alt="shreyas" />
 				</div>
 				<div class="box-desc">
 					<h5>Shreyas Daptare</h5>
@@ -34,7 +34,7 @@
 		<div class="col-sm-6 col-lg-3 my-auto">
 			<div class="box shadow-sm p-4">
 				<div class="image-wrapper mb-3">
-					<img class="img-fluid" src="tan.png" alt="..." />
+					<img class="img-fluid" src="tan.png" alt="tanmay" />
 				</div>
 				<div class="box-desc">
 					<h5>Tanmay Bora</h5>
@@ -50,7 +50,7 @@
 		<div class="col-sm-6 col-lg-3 my-auto">
 			<div class="box shadow-sm p-4">
 				<div class="image-wrapper mb-3">
-					<img class="img-fluid" src="zyro.png" alt="..." />
+					<img class="img-fluid" src="zyro.png" alt="Jeevan" />
 				</div>
 				<div class="box-desc">
 					<h5>Jeevan Gharate</h5>
@@ -66,7 +66,7 @@
 		<div class="col-sm-6 col-lg-3 my-auto">
 			<div class="box shadow-sm p-4">
 				<div class="image-wrapper mb-3">
-					<img class="img-fluid" src="durg.png" alt="..." />
+					<img class="img-fluid" src="durg.png" alt="Durgesh" />
 				</div>
 				<div class="box-desc">
 					<h5>Durgesh Ghoderao</h5>
