@@ -1,45 +1,66 @@
 <?php
-$full_name = $_POST['logname'];
-$email = $_POST['logemail'];
-$password = $_POST['logpass'];
+require_once "config.php";
 
-if(!empty($email) || !empty($password) || !empty($full_name)) {
-	$host = "localhost";
-	$dbUsername = "root";
-	$dbPassword = "qwerty";
-	$dbName = "userdb";
+$full_name = trim($_POST['logname']);
+$email = $password = "";
+$email_err = $password_err = "";
 
-	$conn = mysqli_connect($host, $dbUsername, $dbPassword, $dbName);
-	
-	if(mysqli_connect_error()) {
-		die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
-	} else {
-		$SELECT = "SELECT email FROM usertb where email = ? Limit 1";
-		$INSERT = "INSERT INTO usertb (full_name, email, password) values(?, ?, ?)";
-		
-		$stmt = $conn->prepare($SELECT);
-		$stmt->bind_param("s", $email);
-		$stmt->execute();
-		$stmt->bind_result($email);
-		$stmt->store_result();
-		$rnum = $stmt->num_rows;
+if($_SERVER['REQUEST_METHOD'] == "POST") {
+	if(empty(trim($_POST["logemail"]))) {
+		echo "All fields are required";
+		die();
+	}
+	else {
+		$SELECT = "SELECT email FROM usertb where email = ?";
+		$stmt = mysqli_prepare($conn, $SELECT);
+		if($stmt) {
+			mysqli_stmt_bind_param($stmt, "s", $param_email);
 
-		if($rnum==0) {
-			$stmt->close();
+			$param_email = trim($_POST['logemail']);
 
-			$stmt = $conn->prepare($INSERT);
-			$stmt->bind_param($full_name, $email, $password);
-			$stmt->execute();
-			echo "1 row inserted successfully";
-		} else {
-			echo "Email already in use";
+			if(mysqli_stmt_execute($stmt)) {
+				mysqli_stmt_store_result($stmt);
+				if(mysqli_stmt_num_rows($stmt) == 1) {
+					$email_err = "This email is already taken";
+				} else {
+					$email=trim($_POST['logemail']);
+				}
+			} else {
+				echo "Something went wrong";
+			}
 		}
-		$stmt->close();
-		$conn->close();
 	}
 
-} else {
-	echo "All fields are required";
-	die();
+	mysqli_stmt_close($stmt);
+
+	if(empty(trim($_POST["logpass"]))) {
+		$password_err = "Password cannot be blank";
+	}
+	elseif(strlen(trim($_POST['logpass'])) < 5) {
+		$password_err = "Password cannot be less than 5 characters";
+	}
+	else {
+		$password = trim($_POST['logpass']);
+	}
+
+	if(empty($password_err) && empty($email_err)) {
+		$INSERT = "INSERT INTO usertb (full_name, email, password) VALUES(?, ?, ?)";
+		$stmt = mysqli_prepare($conn, $INSERT);
+		if($stmt) {
+			mysqli_stmt_bind_param($stmt, "sss", $param_full_name, $param_email, $param_password);
+
+			$param_full_name = $full_name;
+			$param_email= $email;
+			$param_password = password_hash($password, PASSWORD_DEFAULT);
+
+			if(mysqli_stmt_execute($stmt)) {
+				header("location: login.php");
+			} else {
+				echo "Something went wrong... cannot redirect!";
+			}
+		}
+		mysqli_stmt_close($stmt);
+	}
+	mysqli_close($conn);
 }
 ?>
